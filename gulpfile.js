@@ -11,7 +11,8 @@ gulp.task('sass', function() {
         'lineNumbers': true
     })
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('css'))
+    .pipe(connect.reload());
 });
 
 gulp.task('connect', function() {
@@ -22,8 +23,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('**/*.scss', ['sass-lint', 'sass']);
-    gulp.watch('**/*.coffee', ['coffee']);
+    gulp.watch('**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['connect']);
+gulp.task('default', ['sass', 'connect', 'watch']);
