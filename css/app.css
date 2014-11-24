@@ -1,0 +1,103 @@
+/**
+ * Sample CSS for "Gulp for CSS" Article
+ */
+
+/* ==========================================================================
+    Base
+ ========================================================================== */
+html {
+  background: #333333 url('../img/dark_wall.png');
+  color: #bbbbbb;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  color: #ffffff;
+  margin-top: 1.4em;
+  margin-bottom: 0;
+}
+
+body {
+  max-width: 40em;
+  line-height: 1.4em;
+  padding: 1em;
+  padding-top: 10vh;
+  margin: auto;
+  display: none; /* not the best way to do this */
+}
+
+blockquote {
+  border-left: 2px solid #eeeeee;
+  padding-left: 1em;
+  font-size: 1.4em;
+  font-style: italic;
+  color: #eeeeee;
+}
+
+/* ==========================================================================
+     Elements
+ ========================================================================== */
+.sep {
+  /* Positioning */
+  position: relative;
+  /* Display & Box Model */
+  height: 20px;
+  margin-top: 4em;
+  width: 100%;
+  /* Other */
+  content: '';
+  background: transparent;
+}
+
+.sep::after {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Display & Box Model */
+  display: block;
+  width: 100%;
+  height: 3px;
+  /* Other */
+  background: #eeeeee;
+  content: '';
+  transform: rotate(10deg) rotateY(50deg);
+  transition: all 0.3s ease-in;
+}
+
+.sep:hover::after {
+  transform: rotate(-10deg) rotateY(100deg);
+  background: #f0ff0f;
+}
+
+.sep::before {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Display & Box Model */
+  display: block;
+  width: 100%;
+  height: 3px;
+  /* Everything Else */
+  background: #eeeeee;
+  content: '';
+  transform: rotate(-10deg) rotateY(50deg);
+  transition: all 0.3s ease-in;
+}
+
+.sep:hover::before {
+  transform: rotate(10deg) rotateY(100deg);
+  background: #f0ff0f;
+}
+
+/* ==========================================================================
+    Blocks
+ ========================================================================== */
+.footer {
+  text-align: center;
+  color: #eeeeee;
+  font-size: 0.85em;
+}
