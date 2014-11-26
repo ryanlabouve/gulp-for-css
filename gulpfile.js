@@ -3,6 +3,11 @@ var gutil = require('gulp-util');
 var connect = require('gulp-connect');
 var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var scsslint = require('gulp-scss-lint');
+var minifycss = require('gulp-minify-css');
+var rename = require('gulp-rename');
+
+
 
 gulp.task('sass', function() {
     return sass('scss/app.scss', {
@@ -15,6 +20,21 @@ gulp.task('sass', function() {
     .pipe(connect.reload());
 });
 
+gulp.task('sass-lint', function() {
+    return gulp.src('scss/app.scss')
+        .pipe(scsslint({
+            'config': '.scss-lint.yml'
+        }));
+});
+
+gulp.task('sass-minify', function() {
+    return gulp.src('css/app.css')
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifycss())
+        .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('connect', function() {
     connect.server({
         port: 8989,
@@ -23,7 +43,8 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('**/*.scss', ['sass']);
+    gulp.watch('**/*.scss', ['sass', 'sass-lint']);
 });
 
-gulp.task('default', ['sass', 'connect', 'watch']);
+gulp.task('build', ['sass', 'sass-minify']);
+gulp.task('default', ['sass', 'sass-lint', 'connect', 'watch']);
