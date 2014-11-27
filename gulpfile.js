@@ -6,8 +6,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var scsslint = require('gulp-scss-lint');
 var minifycss = require('gulp-minify-css');
 var rename = require('gulp-rename');
-
-
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('sass', function() {
     return sass('scss/app.scss', {
@@ -15,6 +14,7 @@ gulp.task('sass', function() {
         'style': 'expanded',
         'lineNumbers': true
     })
+    .pipe(autoprefixer({ browsers: ['last 2 version', 'Firefox < 20', '> 5%'] }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('css'))
     .pipe(connect.reload());
